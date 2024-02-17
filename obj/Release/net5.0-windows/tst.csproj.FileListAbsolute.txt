@@ -1,0 +1,17 @@
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\tst.exe
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\tst.deps.json
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\tst.runtimeconfig.json
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\tst.runtimeconfig.dev.json
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\tst.dll
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\tst.pdb
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\tst.Form1.resources
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\tst.csproj.GenerateResource.cache
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\tst.GeneratedMSBuildEditorConfig.editorconfig
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\tst.AssemblyInfoInputs.cache
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\tst.AssemblyInfo.cs
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\tst.csproj.CoreCompileInputs.cache
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\tst.dll
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\refint\tst.dll
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\tst.pdb
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\tst.genruntimeconfig.cache
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Release\net5.0-windows\ref\tst.dll
