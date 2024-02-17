@@ -33,3 +33,4 @@ C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Debug\net5.0-windows\refint\ts
 C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Debug\net5.0-windows\tst.pdb
 C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Debug\net5.0-windows\tst.genruntimeconfig.cache
 C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Debug\net5.0-windows\ref\tst.dll
+C:\$stuf\document$\compsci\solutionsNthat\tst\obj\Debug\net5.0-windows\tst.sourcelink.json

@@ -41,21 +41,23 @@
             // Targetword
             // 
             Targetword.AutoSize = true;
+            Targetword.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Targetword.Location = new System.Drawing.Point(12, 38);
             Targetword.Name = "Targetword";
-            Targetword.Size = new System.Drawing.Size(16, 15);
+            Targetword.Size = new System.Drawing.Size(29, 28);
             Targetword.TabIndex = 0;
             Targetword.Text = "! !";
             // 
             // wordamount
             // 
             wordamount.Location = new System.Drawing.Point(108, 7);
-            wordamount.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            wordamount.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
+            wordamount.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             wordamount.Name = "wordamount";
             wordamount.Size = new System.Drawing.Size(33, 23);
             wordamount.TabIndex = 1;
             wordamount.ThousandsSeparator = true;
-            wordamount.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            wordamount.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // examplebutton
             // 
@@ -70,18 +72,19 @@
             // trueOrfalse
             // 
             trueOrfalse.AutoSize = true;
-            trueOrfalse.Location = new System.Drawing.Point(12, 128);
+            trueOrfalse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            trueOrfalse.Location = new System.Drawing.Point(12, 258);
             trueOrfalse.Name = "trueOrfalse";
-            trueOrfalse.Size = new System.Drawing.Size(10, 15);
+            trueOrfalse.Size = new System.Drawing.Size(13, 19);
             trueOrfalse.TabIndex = 4;
             trueOrfalse.Text = "!";
             // 
             // textBox1
             // 
             textBox1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            textBox1.Location = new System.Drawing.Point(12, 56);
+            textBox1.Location = new System.Drawing.Point(12, 203);
             textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(340, 23);
+            textBox1.Size = new System.Drawing.Size(587, 23);
             textBox1.TabIndex = 5;
             textBox1.WordWrap = false;
             textBox1.KeyDown += Form1_KeyDown;
@@ -99,10 +102,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            label1.Location = new System.Drawing.Point(12, 103);
+            label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            label1.Location = new System.Drawing.Point(12, 229);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(178, 15);
+            label1.Size = new System.Drawing.Size(207, 19);
             label1.TabIndex = 7;
             label1.Text = "Press ENTER to check answer...";
             // 
@@ -110,7 +113,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(377, 154);
+            ClientSize = new System.Drawing.Size(634, 321);
             Controls.Add(label1);
             Controls.Add(Titlelabel);
             Controls.Add(textBox1);
