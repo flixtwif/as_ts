@@ -35,6 +35,7 @@
             textBox1 = new System.Windows.Forms.TextBox();
             Titlelabel = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
+            randomwordmode = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)wordamount).BeginInit();
             SuspendLayout();
             // 
@@ -50,7 +51,7 @@
             // 
             // wordamount
             // 
-            wordamount.Location = new System.Drawing.Point(108, 7);
+            wordamount.Location = new System.Drawing.Point(566, 9);
             wordamount.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             wordamount.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             wordamount.Name = "wordamount";
@@ -58,14 +59,15 @@
             wordamount.TabIndex = 1;
             wordamount.ThousandsSeparator = true;
             wordamount.Value = new decimal(new int[] { 10, 0, 0, 0 });
+            wordamount.Visible = false;
             // 
             // examplebutton
             // 
-            examplebutton.Location = new System.Drawing.Point(147, 7);
+            examplebutton.Location = new System.Drawing.Point(99, 5);
             examplebutton.Name = "examplebutton";
             examplebutton.Size = new System.Drawing.Size(133, 23);
             examplebutton.TabIndex = 2;
-            examplebutton.Text = "Generate words";
+            examplebutton.Text = "Generate sentence";
             examplebutton.UseVisualStyleBackColor = true;
             examplebutton.Click += examplebutton_Click;
             // 
@@ -109,11 +111,23 @@
             label1.TabIndex = 7;
             label1.Text = "Press ENTER to check answer...";
             // 
+            // randomwordmode
+            // 
+            randomwordmode.AutoSize = true;
+            randomwordmode.Location = new System.Drawing.Point(484, 9);
+            randomwordmode.Name = "randomwordmode";
+            randomwordmode.Size = new System.Drawing.Size(76, 19);
+            randomwordmode.TabIndex = 8;
+            randomwordmode.Text = "Gibberish";
+            randomwordmode.UseVisualStyleBackColor = true;
+            randomwordmode.CheckedChanged += randomwordmode_CheckedChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(634, 321);
+            Controls.Add(randomwordmode);
             Controls.Add(label1);
             Controls.Add(Titlelabel);
             Controls.Add(textBox1);
@@ -142,5 +156,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label Titlelabel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox randomwordmode;
     }
 }
