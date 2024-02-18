@@ -92,44 +92,70 @@ namespace tst
             {
                 string textbox_nonewlines = textBox1.Text.Replace("\n", " ").Replace("\r", " ").TrimEnd(' '); // the content of the text box but without the new lines, as it makes checking weird
                 string Targetword_nonewlines = Targetword.Text.Replace("\n", " ").Replace("\r", " ").TrimEnd(' '); // same thing as ^ but with the target word
-                int accuracylevel = getAccuracylevel(Targetword_nonewlines, textbox_nonewlines); // gets the accuracy level
+                int accuracylevel = getaccuracylevel2(Targetword_nonewlines, textbox_nonewlines); // gets the accuracy level
                 if (textbox_nonewlines == Targetword_nonewlines) // if the user's input was EXACTLY the target words
                 {
                     sw.Stop(); // stop the timer. Then chnage the text to say a message, the time taken and accuracy level. same with all accuracy levels
-                    trueOrfalse.Text = $"Correct! {Math.Round(sw.Elapsed.TotalSeconds, 2)}s ({Math.Round(Targetword.ToString().Length / sw.Elapsed.TotalSeconds, 2)} Letters per second at {accuracylevel}% accuracy!)";
+                    trueOrfalse.Text = $"Correct! {Math.Round(sw.Elapsed.TotalSeconds, 2)}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy!)";
                     trueOrfalse.ForeColor = System.Drawing.Color.DarkGreen; // change colour to green to imply good
                 }
                 else if (textBox1.Text != Targetword.Text && accuracylevel > 84) // if accuracy level is 85 or more, but not exactly correct
                 {
                     sw.Stop();
-                    trueOrfalse.Text = $"Well done! {Math.Round(sw.Elapsed.TotalSeconds, 2)}s ({Math.Round(Targetword.ToString().Length / sw.Elapsed.TotalSeconds, 2)} Letters per second at {accuracylevel}% accuracy.)";
+                    trueOrfalse.Text = $"Well done! {Math.Round(sw.Elapsed.TotalSeconds, 2)}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
                     trueOrfalse.ForeColor = System.Drawing.Color.Green;
                 }
                 else if (textBox1.Text != Targetword.Text && accuracylevel < 85) // if accuracy level is less than 85
                 {
                     sw.Stop();
-                    trueOrfalse.Text = $"Not quite right. {Math.Round(sw.Elapsed.TotalSeconds, 2)}s ({Math.Round(Targetword.ToString().Length / sw.Elapsed.TotalSeconds, 2)} Letters per second at {accuracylevel}% accuracy.)";
+                    trueOrfalse.Text = $"Not quite right. {Math.Round(sw.Elapsed.TotalSeconds, 2)}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
                     trueOrfalse.ForeColor = System.Drawing.Color.Red; // change colour to red to show bad
                 }
             }
         }
 
-        private int getAccuracylevel(string generatedWord, string typedWord)
+        private int wordsinstring(string s)
         {
-            if (typedWord.Length < 1) // check this at the beginning so you don't get a divide by 0 exception
+            int numberOfSpaces = 0;
+            for (int x = 0; x < s.Length; x++) // checks for the number of SPACE characters in the string
             {
-                return 0; // makes sense because if they typed less than 1 they would have 0 score anyway. No need to check for generatedword length as you can't generate less than 1 word.
-            }
-            int points = 0; // use this to track the accuracy
-            for (int x = 0; x < Math.Min(typedWord.Length, generatedWord.Length); x++) // iterates through each character of either the user's word or the generate word, whichever is shorter
-            {
-                if (typedWord[x] == generatedWord[x])
+                if (s[x] == ' ')
                 {
-                    points++; // if the same character is in the same place, +1 points
+                    numberOfSpaces++; 
                 }
             }
-            double accuracy = (double)points / generatedWord.Length * 100; // you have to make it a double because otherwise it will always be 0 before you can times by 100, meaning accuracy level will always be 0
-            return Convert.ToInt32(Math.Round(accuracy, 2)); // but convert to an integer at the end
+            return numberOfSpaces+1; // return +1 because there will be a word after the last space
+        }
+
+        private double calculateWPM()
+        {
+            return Math.Round(wordsinstring(Targetword.ToString()) / sw.Elapsed.TotalMinutes, 2); // The amount of words divided by the total amount of minutes
+        }
+        private int getaccuracylevel2(string source, string usr) // Levenshtein distance, I don't understand it myself, sorry
+        {
+            int[,] matrix = new int[source.Length + 1, usr.Length + 1];
+            if (usr.Length == 0)
+            {
+                return usr.Length;
+            }
+            for (int x = 0; x < source.Length + 1; x++)
+            {
+                matrix[x, 0] = x;
+            }
+            for (int y = 0; y < usr.Length + 1; y++)
+            {
+                matrix[0, y] = y;
+            }
+            for (int a = 1; a <= source.Length; a++)
+            {
+                for (int b = 1; b <= usr.Length; b++)
+                {
+                    int cost = (usr[b - 1] == source[a - 1]) ? 0 : 1;
+                    matrix[a, b] = Math.Min(Math.Min(matrix[a - 1, b] + 1, matrix[a, b - 1] + 1), matrix[a - 1, b - 1] + cost);
+                }
+            }
+            int characterswrong = matrix[source.Length, usr.Length];
+            return Convert.ToInt32((double)(usr.Length - characterswrong) / usr.Length * 100); // you have to convert to a double and then back to an int because otherwise it will always return 0
         }
 
         private void randomwordmode_CheckedChanged(object sender, EventArgs e)
@@ -170,7 +196,7 @@ namespace tst
         , "The wicked flee when no man pursueth; but the righteous are bold as a lion."
         , "Luck is what happens when preparation meets opportunity."
         , "Morale is when your hands and feet keep on working when your head says it can't be done."
-        , "Two brothers went to a judge to settle a dispute on the division of the estate left to them by their father. The judge ruled: \"Let one brother divide the estate, and let the other brother have first choice.\""
+        , "It is better to lead from behind and to put others in front, especially when you celebrate victory when nice things occur. You take the front line when there is danger. Then people will appreciate your leadership."
         , "A new idea is delicate. It can be killed by a sneer or a yawn; it can be stabbed to death by a quip and worried to death by a frown on the right man's brow."};
     }
 }
