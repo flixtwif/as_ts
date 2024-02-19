@@ -1,4 +1,4 @@
-﻿namespace tst
+﻿namespace typingspeedtest
 {
     partial class Form1
     {
@@ -43,11 +43,12 @@
             // 
             Targetword.AutoSize = true;
             Targetword.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Targetword.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             Targetword.Location = new System.Drawing.Point(12, 38);
             Targetword.Name = "Targetword";
-            Targetword.Size = new System.Drawing.Size(29, 28);
+            Targetword.Size = new System.Drawing.Size(535, 28);
             Targetword.TabIndex = 0;
-            Targetword.Text = "! !";
+            Targetword.Text = "Your sentence will generate here after you press the button...";
             // 
             // wordamount
             // 
@@ -77,9 +78,8 @@
             trueOrfalse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             trueOrfalse.Location = new System.Drawing.Point(12, 258);
             trueOrfalse.Name = "trueOrfalse";
-            trueOrfalse.Size = new System.Drawing.Size(13, 19);
+            trueOrfalse.Size = new System.Drawing.Size(0, 19);
             trueOrfalse.TabIndex = 4;
-            trueOrfalse.Text = "!";
             // 
             // textBox1
             // 
@@ -141,7 +141,7 @@
             MinimizeBox = false;
             Name = "Form1";
             ShowIcon = false;
-            Text = "tst";
+            Text = "AS typingspeedtest";
             ((System.ComponentModel.ISupportInitialize)wordamount).EndInit();
             ResumeLayout(false);
             PerformLayout();

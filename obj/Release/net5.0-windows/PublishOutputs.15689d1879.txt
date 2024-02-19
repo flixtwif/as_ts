@@ -1,0 +1,5 @@
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\publish\rev4\tst.exe
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\publish\rev4\tst.dll
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\publish\rev4\tst.deps.json
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\publish\rev4\tst.runtimeconfig.json
+C:\$stuf\document$\compsci\solutionsNthat\tst\bin\Release\net5.0-windows\publish\rev4\tst.pdb

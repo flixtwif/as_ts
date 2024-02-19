@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace tst
+namespace typingspeedtest
 {
     public partial class Form1 : Form
     {
-        
         System.Diagnostics.Stopwatch sw = new(); // create a stopwatch for later
+        bool firstopen = true; // certain things will be different on the first open
         public Form1()
         {
             InitializeComponent();
@@ -61,6 +61,11 @@ namespace tst
         }
         private void examplebutton_Click(object sender, EventArgs e)
         {
+            if (firstopen == true)
+            {
+                firstopen = false;
+                Targetword.ForeColor = System.Drawing.Color.Black;
+            }
             startTime(); // call the function when the 'generate words' button is clicked
         }
 
@@ -85,30 +90,34 @@ namespace tst
         {
             checktextbox(e); // call when a button is pressed
         }
-        private void checktextbox(KeyEventArgs e)
+        private void checktextbox(KeyEventArgs e) // big function
         {
-
+            if (firstopen == true)
+            {
+                return; // basically not do any of the function if its the first open as otherwise you would be checking against the temporary label text was used before a sentence was generated
+            }
             if (e.KeyCode == Keys.Enter) // continues only if ENTER was pressed
             {
                 string textbox_nonewlines = textBox1.Text.Replace("\n", " ").Replace("\r", " ").TrimEnd(' '); // the content of the text box but without the new lines, as it makes checking weird
                 string Targetword_nonewlines = Targetword.Text.Replace("\n", " ").Replace("\r", " ").TrimEnd(' '); // same thing as ^ but with the target word
                 int accuracylevel = getaccuracylevel2(Targetword_nonewlines, textbox_nonewlines); // gets the accuracy level
+                double secondstaken = Math.Round(sw.Elapsed.TotalSeconds, 2);
                 if (textbox_nonewlines == Targetword_nonewlines) // if the user's input was EXACTLY the target words
                 {
                     sw.Stop(); // stop the timer. Then chnage the text to say a message, the time taken and accuracy level. same with all accuracy levels
-                    trueOrfalse.Text = $"Correct! {Math.Round(sw.Elapsed.TotalSeconds, 2)}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy!)";
+                    trueOrfalse.Text = $"Correct! {secondstaken}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy!)";
                     trueOrfalse.ForeColor = System.Drawing.Color.DarkGreen; // change colour to green to imply good
                 }
                 else if (textBox1.Text != Targetword.Text && accuracylevel > 84) // if accuracy level is 85 or more, but not exactly correct
                 {
                     sw.Stop();
-                    trueOrfalse.Text = $"Well done! {Math.Round(sw.Elapsed.TotalSeconds, 2)}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
+                    trueOrfalse.Text = $"Well done! {secondstaken}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
                     trueOrfalse.ForeColor = System.Drawing.Color.Green;
                 }
                 else if (textBox1.Text != Targetword.Text && accuracylevel < 85) // if accuracy level is less than 85
                 {
                     sw.Stop();
-                    trueOrfalse.Text = $"Not quite right. {Math.Round(sw.Elapsed.TotalSeconds, 2)}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
+                    trueOrfalse.Text = $"Not quite right. {secondstaken}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
                     trueOrfalse.ForeColor = System.Drawing.Color.Red; // change colour to red to show bad
                 }
             }
@@ -121,10 +130,10 @@ namespace tst
             {
                 if (s[x] == ' ')
                 {
-                    numberOfSpaces++; 
+                    numberOfSpaces++;
                 }
             }
-            return numberOfSpaces+1; // return +1 because there will be a word after the last space
+            return numberOfSpaces + 1; // return +1 because there will be a word after the last space
         }
 
         private double calculateWPM()
@@ -173,6 +182,7 @@ namespace tst
 
     static class TargetExtracts
     {
+
         /* Randomwords is a massive list of random words to make a random string with (used in GetRandomSTring function) */
         public static string[] RandomWords = { "civilian", "mathematics", "medium", "formulate", "preparation", "society", "illusion", "corruption", "memory", "momentum", "ancestor", "opposite", "appreciate", "ecstasy", "photography", "remember", "financial", "repetition", "cooperation", "agreement", "embarrassment", "solution", "agenda", "legislation", "nonremittal", "transaction", "objective", "undermine", "handicap", "anxiety" };
         public static string[] Extracts = { // nabbed from https://thepracticetest.com/typing/tests/inspirational-quotes/ used in the getRandomExtract function
@@ -197,6 +207,25 @@ namespace tst
         , "Luck is what happens when preparation meets opportunity."
         , "Morale is when your hands and feet keep on working when your head says it can't be done."
         , "It is better to lead from behind and to put others in front, especially when you celebrate victory when nice things occur. You take the front line when there is danger. Then people will appreciate your leadership."
-        , "A new idea is delicate. It can be killed by a sneer or a yawn; it can be stabbed to death by a quip and worried to death by a frown on the right man's brow."};
+        , "A new idea is delicate. It can be killed by a sneer or a yawn; it can be stabbed to death by a quip and worried to death by a frown on the right man's brow."
+        , "No choice recurs. We may get similar choices again, but never that exact one. Hesitation--inaction--is just as irrevocable as action. What the motorist, locked on the one-way road, is to space, we are to the fourth dimension: we truly pass this way but once."
+        , "Sitting is an eloquent business; any actor will tell you that. We sit according to our natures. We sprawl and straddle, we rest like boxers between rounds, we fidget, perch, cross and uncross our legs, lose patience, lose endurance."
+        , "To argue with those who have renounced the use and authority of reason is as futile as to administer medicine to the dead."
+        , "Leadership is solving problems. The day soldiers stop bringing you their problems is the day you have stopped leading them. They have either lost confidence that you can help or concluded you do not care. Either case is a failure of leadership."
+        , "The farther a man knows himself to be from perfection, the nearer he is to it."
+        , "You will never stub your toe standing still, but the faster you go, the more chance you have of getting somewhere."
+        , "The herd may graze where it pleases or stampede where it pleases, but he who lives the adventurous life will remain unafraid when he finds himself alone."
+        , "A good scare is worth more to a man than good advice."
+        , "It is better to lead from behind and to put others in front, especially when you celebrate victory when nice things occur. You take the front line when there is danger. Then people will appreciate your leadership."
+        , "How many cares one loses when one decides not to be something, but to be someone."
+        , "Conviction is worthless unless it is converted into conduct."
+        , "This above all: to thine own self be true, And it must follow, as the night the day, Thou canst not then be false to any man."
+        , "One of the most important things about leadership is that you have to have the kind of humility that will allow you to be coached."
+        , "So long as a man is angry he can't be in the right."
+        , "The anger of a good man lasts an instant; that of a meddler two hours; that of a base man a day and a night; and that of a great sinner until death."
+        , "A leader is best when people barely know he exists, when his work is done, his aim fulfilled, they will say: we did it ourselves."
+        , "Father taught us that opportunity and responsibility go hand in hand. I think we all act on that principle; on the basic human impulse that makes a man want to make the best of what's in him and what's been given him."
+        , "Our humanity were a poor thing were it not for the divinity that stirs within us."
+        , "Let then the first act every morning be to make the following resolve for the day: I shall not fear anyone on earth. I shall fear only God. I shall not bear ill will toward anyone. I shall not submit to injustice from anyone. I shall conquer untruth by truth. And in resisting untruth I shall put up with all suffering."};
     }
 }
