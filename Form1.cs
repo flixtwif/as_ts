@@ -59,7 +59,7 @@ namespace typingspeedtest
             string s = new string(ex2); // turn the char array back into a string to return
             return s;
         }
-        private void examplebutton_Click(object sender, EventArgs e)
+        private void examplebutton_Click(object sender, EventArgs e) // when you click the button
         {
             if (firstopen == true)
             {
@@ -101,25 +101,30 @@ namespace typingspeedtest
                 string textbox_nonewlines = textBox1.Text.Replace("\n", " ").Replace("\r", " ").TrimEnd(' '); // the content of the text box but without the new lines, as it makes checking weird
                 string Targetword_nonewlines = Targetword.Text.Replace("\n", " ").Replace("\r", " ").TrimEnd(' '); // same thing as ^ but with the target word
                 int accuracylevel = getaccuracylevel2(Targetword_nonewlines, textbox_nonewlines); // gets the accuracy level
-                double secondstaken = Math.Round(sw.Elapsed.TotalSeconds, 2);
-                if (textbox_nonewlines == Targetword_nonewlines) // if the user's input was EXACTLY the target words
-                {
-                    sw.Stop(); // stop the timer. Then chnage the text to say a message, the time taken and accuracy level. same with all accuracy levels
-                    trueOrfalse.Text = $"Correct! {secondstaken}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy!)";
-                    trueOrfalse.ForeColor = System.Drawing.Color.DarkGreen; // change colour to green to imply good
-                }
-                else if (textBox1.Text != Targetword.Text && accuracylevel > 84) // if accuracy level is 85 or more, but not exactly correct
-                {
-                    sw.Stop();
-                    trueOrfalse.Text = $"Well done! {secondstaken}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
-                    trueOrfalse.ForeColor = System.Drawing.Color.Green;
-                }
-                else if (textBox1.Text != Targetword.Text && accuracylevel < 85) // if accuracy level is less than 85
-                {
-                    sw.Stop();
-                    trueOrfalse.Text = $"Not quite right. {secondstaken}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
-                    trueOrfalse.ForeColor = System.Drawing.Color.Red; // change colour to red to show bad
-                }
+                double secondstaken = Math.Round(sw.Elapsed.TotalSeconds, 2); // the amount of seconds until they pressed enter
+                showfeedback(textbox_nonewlines, Targetword_nonewlines, accuracylevel, secondstaken);
+            }
+        }
+
+        private void showfeedback(string textbox_nonewlines, string Targetword_nonewlines, int accuracylevel, double secondstaken)
+        {
+            if (textbox_nonewlines == Targetword_nonewlines) // if the user's input was EXACTLY the target words
+            {
+                sw.Stop(); // stop the timer. Then chnage the text to say a message, the time taken and accuracy level. same with all accuracy levels
+                trueOrfalse.Text = $"Correct! {secondstaken}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy!)";
+                trueOrfalse.ForeColor = System.Drawing.Color.DarkGreen; // change colour to green to imply good
+            }
+            else if (textBox1.Text != Targetword.Text && accuracylevel > 84) // if accuracy level is 85 or more, but not exactly correct
+            {
+                sw.Stop();
+                trueOrfalse.Text = $"Well done! {secondstaken}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
+                trueOrfalse.ForeColor = System.Drawing.Color.Green;
+            }
+            else if (textBox1.Text != Targetword.Text && accuracylevel < 85) // if accuracy level is less than 85
+            {
+                sw.Stop();
+                trueOrfalse.Text = $"Not quite right. {secondstaken}s ({calculateWPM()} words per minute at {accuracylevel}% accuracy.)";
+                trueOrfalse.ForeColor = System.Drawing.Color.Red; // change colour to red to show bad
             }
         }
 
@@ -164,7 +169,12 @@ namespace typingspeedtest
                 }
             }
             int characterswrong = matrix[source.Length, usr.Length];
-            return Convert.ToInt32((double)(usr.Length - characterswrong) / usr.Length * 100); // you have to convert to a double and then back to an int because otherwise it will always return 0
+            int accuracypcnt = Convert.ToInt32((double)(usr.Length - characterswrong) / usr.Length * 100); // you have to convert to a double and then back to an int because otherwise it will always return 0, this value is the percentage of characters typed accurately
+            if (accuracypcnt < 0)
+            {
+                accuracypcnt = 0; // if you don't have this logic then you can get a negative accuracy percentage if you're really bad
+            }
+            return accuracypcnt;
         }
 
         private void randomwordmode_CheckedChanged(object sender, EventArgs e)
