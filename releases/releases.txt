@@ -1,1 +1,1 @@
-latest = rev5
+latest = rev6
